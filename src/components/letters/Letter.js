@@ -10,6 +10,7 @@ class Letter extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { letter } = this.props;
+    // dictionary would be better data structure
     if(nextProps.guesses.includes(letter)) this.setState({ selected: true });
   }
 
@@ -17,7 +18,7 @@ class Letter extends Component {
 
     const { letter, onSelect } = this.props;
     const { selected } = this.state;
-
+    // can set 'selected' here in render method 
     return (
       <button className="letter" onClick={(event) => onSelect(event.target)} value={letter} disabled={selected ? true : false}>
         {letter}

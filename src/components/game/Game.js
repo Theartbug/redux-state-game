@@ -20,6 +20,7 @@ class Game extends Component {
 
     const { word, correct, guesses, player } = this.props;
     if(!player) return null;
+    // move into action creator
     const win = correct === word.length;
     const lose = (guesses.length - correct) === 6;
 

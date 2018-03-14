@@ -22,6 +22,7 @@ export function newGame() {
   };
 }
 
+// write to local storage here:
 export function endGame(player, score) {
   return {
     type: GAME_END,
