@@ -5,6 +5,7 @@ import { newGame } from './actions';
 import { ClipLoader } from 'react-spinners';
 import './game.css';
 import Letters from '../letters/Letters';
+import Player from '../player/Player';
 import Word from '../word/Word';
 import Image from '../image/Image';
 import Replay from '../replay/Replay';
@@ -19,27 +20,32 @@ class Game extends Component {
 
   render() {
 
-    const { word, correct, incorrect, player, loading } = this.props;
-    if(!player) return null;
-    const win = correct === word.length;
-    const lose = incorrect === 6; 
+    const { word, loading, gameResult } = this.props;
+    const gameEnd = gameResult !== null;
 
     return (
-      <div className="game">
+      <Fragment>
         <div className="loader">
-          <ClipLoader loading={loading}/>
+          <ClipLoader size={65} loading={loading}/>
         </div>
-        {(win && word !== '') && <Replay outcome={'win'}/>}
-        {lose && <Replay outcome={'lose'}/>}
-        {word !== '' && 
-        <Fragment>
-          <Image gameEnd={win || lose}/>
-          <Word gameEnd={win || lose}/>
-          <Letters gameEnd={win || lose}/>
-        </Fragment>
+        {word && 
+          <div className="game">
+            {(gameResult === 'win') && <Replay outcome={'win'}/>}
+            {(gameResult === 'lose') && <Replay outcome={'lose'}/>}
+            {word !== '' && 
+            <Fragment>
+              <Image gameEnd={gameEnd}/>
+              {gameResult === null &&
+                <Fragment>
+                  <Word/>
+                  <Letters/>
+                </Fragment>
+              }
+            </Fragment>
+            }
+          </div>
         }
-      
-      </div>
+      </Fragment>
     );
   }
 }
@@ -49,9 +55,10 @@ export default connect(
     loading: state.loading,
     correct: state.correct, 
     word: state.word,
-    player: state.player,
+    player: state.user,
     scores: state.scores,
-    incorrect: state.incorrect
+    incorrect: state.incorrect,
+    gameResult: state.gameResult
   }),
   ({ loadWords, newGame })
 )(Game);
