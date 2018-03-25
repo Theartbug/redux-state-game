@@ -9,6 +9,7 @@ Create a state-based game that runs in the browser utilizing react / redux.
 * Add firebase to keep track of data and users
 * Use firebase user auth
 * Create a score board with top game scores by users
+* Use ReactCSSTransitionGroup to add some animations
 
 Steps Taken
 ===
@@ -21,4 +22,4 @@ Bring in Firebase database and user auth. Allow users to sign in, sign up, and l
 Reflection / Changes
 ===
 
-This was a fun exercise in creating a small game that depended on 3rd party api calls. It was great to start with sketches / planning of how the app was going to form. We had an interesting time deciding what components would need to know what data, and what data could be easily derived from what was already in the store. Learning to mock and test firebase stuff was a challenge.
+This was a fun exercise in creating a small game that depended on 3rd party api calls. It was great to start with sketches / planning of how the app was going to form. We had an interesting time deciding what components would need to know what data, and what data could be easily derived from what was already in the store. Learning to mock and test firebase stuff was a challenge. Bringing in ReactCSSTransitionGroup and creating a staggered appearance of the letters for the game was difficult. I eventually realized that each letter needed to have it's own RCSSTG around it, and the animation timing needed to be added to each letter, so an index of the letter was required.
